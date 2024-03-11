@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/App_LMS_C#/.vs/App_LMS_C#
+/App_LMS_C#/App_LMS_C#/obj
+/App_LMS_C#/Library_LMS_C#/obj
+/App_LMS_C#/App_LMS_C#/bin/Debug/net8.0
+/App_LMS_C#/Library_LMS_C#/bin/Debug/net8.0
