@@ -14,6 +14,13 @@ namespace Library_LMS_C_.Services
         {
             courseList.Add(course);
         }
+        public List<Course> Courses
+        { 
+            get 
+            { 
+                return courseList;
+            } 
+        }
 
     }
 }
