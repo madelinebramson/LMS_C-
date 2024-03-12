@@ -2,6 +2,7 @@
 using Library_LMS_C_.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,12 @@ namespace App_LMS_C_.Helpers
     internal class StudentHelper
     {
         private StudentService studentService;
+        private CourseService courseService;
 
         public StudentHelper()
         {
             studentService= StudentService.Current;
+            courseService= CourseService.Current;
         }
         public void CreateStudentRecord(Person? selectedStudent = null)
         {
@@ -76,6 +79,12 @@ namespace App_LMS_C_.Helpers
         public void ListStudents()
         {
             studentService.Students.ForEach(Console.WriteLine);
+            Console.WriteLine("Select a student:");
+            var selectionStr = Console.ReadLine ();
+            var selectionInt = int.Parse(selectionStr ?? "0");
+
+            Console.WriteLine("Student Course List: ");
+            courseService.Courses.Where(c => c.Roster.Any(s => s.Id == selectionInt)).ToList().ForEach(Console.WriteLine);
         }
 
         public void SearchStudents()
@@ -84,6 +93,12 @@ namespace App_LMS_C_.Helpers
             var query = Console.ReadLine() ?? string.Empty;
 
             studentService.Search(query).ToList().ForEach(Console.WriteLine);
+            var selectionStr = Console.ReadLine();
+            var selectionInt = int.Parse(selectionStr ?? "0");
+
+            Console.WriteLine("Student Course List: ");
+            courseService.Courses.Where(c => c.Roster.Any(s => s.Id == selectionInt)).ToList().ForEach(Console.WriteLine);
+
         }
     }
 

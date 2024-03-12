@@ -9,7 +9,23 @@ namespace Library_LMS_C_.Services
 {
     public class CourseService
     {
-        private List<Course> courseList = new List<Course>();
+        private List<Course> courseList;
+        private static CourseService? _instance;
+        private CourseService() 
+        { 
+            courseList = new List<Course>();
+        }
+        public static CourseService Current
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new CourseService();
+                }
+                return _instance;
+            }
+        }
         public void Add(Course course)
         {
             courseList.Add(course);
