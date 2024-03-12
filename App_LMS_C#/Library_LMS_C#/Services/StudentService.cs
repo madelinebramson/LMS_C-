@@ -15,5 +15,12 @@ namespace Library_LMS_C_.Services
         {
             studentList.Add(student);
         }
+        public List<Person> Students
+        {
+           get
+           { 
+               return studentList; 
+           }
+        }
     }
 }

@@ -43,8 +43,11 @@ namespace App_LMS_C_.Helpers
             };
 
             studentService.Add(student);
+        }
 
-            studentService.studentList.ForEach(Console.WriteLine);
+        public void ListStudents()
+        {
+            studentService.Students.ForEach(Console.WriteLine);
         }
     }
 
