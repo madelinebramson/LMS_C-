@@ -55,5 +55,12 @@ namespace App_LMS_C_.Helpers
         {
             courseService.Courses.ForEach(Console.WriteLine);
         }
+        public void SearchCourses()
+        {
+            Console.WriteLine("Enter a query:");
+            var query = Console.ReadLine() ?? string.Empty;
+
+            courseService.Search(query).ToList().ForEach(Console.WriteLine);
+        }
     }
 }

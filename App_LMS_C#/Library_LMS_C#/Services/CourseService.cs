@@ -9,7 +9,7 @@ namespace Library_LMS_C_.Services
 {
     public class CourseService
     {
-        public List<Course> courseList = new List<Course>();
+        private List<Course> courseList = new List<Course>();
         public void Add(Course course)
         {
             courseList.Add(course);
@@ -20,6 +20,12 @@ namespace Library_LMS_C_.Services
             { 
                 return courseList;
             } 
+        }
+        public IEnumerable<Course> Search(string query)
+        {
+            return Courses.Where(s => s.Name.ToUpper().Contains(query.ToUpper())
+               || s.Description.ToUpper().Contains(query.ToUpper())
+               || s.Code.ToUpper().Contains(query.ToUpper()));
         }
 
     }
