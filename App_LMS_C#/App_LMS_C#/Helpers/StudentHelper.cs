@@ -11,7 +11,7 @@ namespace App_LMS_C_.Helpers
     internal class StudentHelper
     {
         private StudentService studentService = new StudentService();
-        public void CreateStudentRecord()
+        public void CreateStudentRecord(Person? selectedStudent = null)
         {
             Console.WriteLine("What is the student's ID?");
             var ID = Console.ReadLine();
@@ -35,14 +35,37 @@ namespace App_LMS_C_.Helpers
                 classEnum = PersonClassification.Senior;
             }
 
-            var student = new Person
+            bool isCreate = false;
+            if (selectedStudent == null)
             {
-                Id = int.Parse(ID ?? "0"),
-                Name = name ?? string.Empty,
-                Classification = classEnum
-            };
+                isCreate = true;
+                selectedStudent = new Person();
+            }
 
-            studentService.Add(student);
+            selectedStudent.Id = int.Parse(ID ?? "0");
+            selectedStudent.Name = name ?? string.Empty;
+            selectedStudent.Classification = classEnum;
+
+            if (isCreate)
+            {
+                studentService.Add(selectedStudent);
+            }
+        }   
+
+        public void UpdateStudentRecord()
+        {
+            Console.WriteLine("Select a student to update: (Use ID)");
+            ListStudents();
+
+            var selectionStr = Console.ReadLine();
+            if (int.TryParse (selectionStr, out var selectionInt)) 
+            {
+                var selectedStudent = studentService.Students.FirstOrDefault(s => s.Id == selectionInt);
+                if (selectedStudent != null) 
+                {
+                    CreateStudentRecord(selectedStudent);
+                }
+            }
         }
 
         public void ListStudents()
