@@ -21,7 +21,7 @@ namespace Library_LMS_C_.Models
             Roster = new List<Person>();
             Assignments = new List<Assignment>();
             Modules = new List<Module>();
-        }
+        } 
 
         public override string ToString()
         {
