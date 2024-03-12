@@ -23,6 +23,10 @@ namespace Library_LMS_C_.Models
             Modules = new List<Module>();
         }
 
+        public override string ToString()
+        {
+            return $"{Code} - {Name}";
+        }
 
 
     }
