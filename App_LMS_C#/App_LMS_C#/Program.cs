@@ -1,6 +1,5 @@
 ﻿using System;
 using App_LMS_C_.Helpers;
-using Library_LMS_C_.Models;
 namespace App_LMS
 {
     internal class Program

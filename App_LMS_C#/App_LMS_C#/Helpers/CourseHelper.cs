@@ -11,6 +11,12 @@ namespace App_LMS_C_.Helpers
     public class CourseHelper
     {
         private CourseService courseService = new CourseService();
+        private StudentService studentService;
+
+        public CourseHelper()
+        {
+            studentService = StudentService.Current;
+        }
 
         public void CreateCourseRecord(Course? selectedCourse = null)
         {
@@ -21,6 +27,33 @@ namespace App_LMS_C_.Helpers
             Console.WriteLine("What is the description of the course");
             var description = Console.ReadLine() ?? string.Empty;
 
+            Console.WriteLine("Which students should be enrolled in this course('Q'to Quit)");
+            var roster = new List<Person>();
+            bool continueAdding = true;
+            while (continueAdding)
+            {
+                studentService.Students.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
+                var selection = "Q";
+                if (studentService.Students.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
+                {
+                   selection = Console.ReadLine() ?? string.Empty;
+                }
+                if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    continueAdding = false;
+                }
+                else
+                {
+                    var selectedId = int.Parse(selection);
+                    var selectedStudent = studentService.Students.FirstOrDefault(s => s.Id == selectedId);
+
+                    if (selectedStudent != null) 
+                    { 
+                        roster.Add(selectedStudent);
+                    }
+                }
+
+            }
             bool isNewCourse = false;
             if (selectedCourse == null)
             {
@@ -31,6 +64,8 @@ namespace App_LMS_C_.Helpers
             selectedCourse.Name = name;
             selectedCourse.Code = code;
             selectedCourse.Description = description;
+            selectedCourse.Roster = new List<Person>();
+            selectedCourse.Roster.AddRange(roster);
 
             if (isNewCourse) 
             {
