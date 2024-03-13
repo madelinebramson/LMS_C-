@@ -13,5 +13,10 @@ namespace Library_LMS_C_.Models
         public decimal TotalAvaliablePoints { get; set; }
         public DateTime DueDate { get; set; }
 
+        public override string ToString()
+        {
+            return $"({DueDate}) {Name}";
+        }
+
     }
 }

@@ -110,7 +110,7 @@ namespace App_LMS_C_.Helpers
         public void UpdateCourseRecord()
         {
             Console.WriteLine("Enter the code for the course to update:");
-            ListCourses();
+            SearchCourses();
 
             var selection = Console.ReadLine();
 
@@ -120,16 +120,27 @@ namespace App_LMS_C_.Helpers
                 CreateCourseRecord(selectedCourse);
             }
         }
-        public void ListCourses()
-        {
-            courseService.Courses.ForEach(Console.WriteLine);
-        }
-        public void SearchCourses()
-        {
-            Console.WriteLine("Enter a query:");
-            var query = Console.ReadLine() ?? string.Empty;
 
-            courseService.Search(query).ToList().ForEach(Console.WriteLine);
+        public void SearchCourses(string? query = null)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                courseService.Courses.ForEach(Console.WriteLine);
+            }
+            else
+            {
+                courseService.Search(query).ToList().ForEach(Console.WriteLine);
+            }
+
+            Console.WriteLine("Select a course:");
+            var code = Console.ReadLine() ?? string.Empty;
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+
+            if (selectedCourse != null)
+            {
+                Console.WriteLine(selectedCourse.DetailDisplay);
+            }
         }
     }
 }
