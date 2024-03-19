@@ -19,7 +19,7 @@ namespace App_LMS_C_.Helpers
             studentService= StudentService.Current;
             courseService= CourseService.Current;
         }
-        public void CreateStudentRecord(Person? selectedStudent = null)
+        public void CreateStudentRecord(Student? selectedStudent = null)
         {
             Console.WriteLine("What is the student's ID?");
             var ID = Console.ReadLine();
@@ -47,7 +47,7 @@ namespace App_LMS_C_.Helpers
             if (selectedStudent == null)
             {
                 isCreate = true;
-                selectedStudent = new Person();
+                selectedStudent = new Student();
             }
 
             selectedStudent.Id = int.Parse(ID ?? "0");
