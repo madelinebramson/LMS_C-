@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Library_LMS_C_.Models
 {
-    public class ContentItem
+    public class FileItem : ContentItem
     {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public string? Path { get; set; }
     }
 }
