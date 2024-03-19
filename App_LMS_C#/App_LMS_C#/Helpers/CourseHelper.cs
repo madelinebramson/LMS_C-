@@ -114,7 +114,7 @@ namespace App_LMS_C_.Helpers
 
             var selection = Console.ReadLine();
 
-            var selectedCourse = courseService.Courses.FirstOrDefault(c => c.Name == selection);
+            var selectedCourse = courseService.Courses.FirstOrDefault(c => c.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
             if (selectedCourse != null)
             {
                 CreateCourseRecord(selectedCourse);
