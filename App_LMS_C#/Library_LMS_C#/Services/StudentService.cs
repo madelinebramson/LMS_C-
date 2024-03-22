@@ -1,4 +1,5 @@
-﻿using Library_LMS_C_.Models;
+﻿using Library_LMS_C_.DataBase;
+using Library_LMS_C_.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace Library_LMS_C_.Services
 {
     public class StudentService
     {
-        private List<Student> studentList;
 
         private static StudentService? _instance;
+
+        public IEnumerable<Student?> Students
+        {
+            get { return FakeDatabase.People.Where(p => p is Student).Select(p => p as Student); }
+        }
         private StudentService()
         {
-            studentList = new List<Student>();
         }
 
         public static StudentService Current
@@ -31,18 +35,12 @@ namespace Library_LMS_C_.Services
         }
         public void Add(Student student)
         {
-            studentList.Add(student);
+            FakeDatabase.People.Add(student);
         }
-        public List<Student> Students
+   
+        public IEnumerable<Student?> Search(string query)
         {
-           get
-           { 
-               return studentList; 
-           }
-        }   
-        public IEnumerable<Student> Search(string query)
-        {
-            return studentList.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
+            return Students.Where(s => (s != null) && s.Name.ToUpper().Contains(query.ToUpper()));
         }
     }
 }

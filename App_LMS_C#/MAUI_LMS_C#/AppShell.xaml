@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MAUI_LMS_C_.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MAUI_LMS_C_"
+    xmlns:localViews="clr-namespace:MAUI_LMS_C_.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MAUI_LMS_C_">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    <ShellContent
+        Title="Instructor"
+        ContentTemplate="{DataTemplate localViews:InstructorView}"
+        Route="Instructor" />
+    <ShellContent
+        Title="Student"
+        ContentTemplate="{DataTemplate localViews:StudentView }"
+        Route="Student" />
+
+
+
+</Shell>

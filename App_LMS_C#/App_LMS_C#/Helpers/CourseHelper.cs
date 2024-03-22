@@ -28,22 +28,40 @@ namespace App_LMS_C_.Helpers
                 selectedCourse = new Course();
             }
 
-            Console.WriteLine("Do you want to update the course code?");
-            var choice = Console.ReadLine() ?? "N";
+            var choice = "Y";
+            if (!isNewCourse)
+            {
+                Console.WriteLine("Do you want to update the course code?");
+                choice = Console.ReadLine() ?? "N";
+            }
             if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
             {
                 Console.WriteLine("What is the course code?");
                 selectedCourse.Code = Console.ReadLine() ?? string.Empty;
             }
-            Console.WriteLine("Do you want to update the course name? ");
-            choice = Console.ReadLine() ?? "N";
+            if (!isNewCourse)
+            {
+                Console.WriteLine("Do you want to update the course name? ");
+                choice = Console.ReadLine() ?? "N";
+            }
+            else
+            {
+                choice = "Y";
+            }
             if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase)) 
             {
                 Console.WriteLine("What is the name of the course?");
                 selectedCourse.Name = Console.ReadLine() ?? string.Empty;
             }
-            Console.WriteLine("Do you want to update the course description?");
-            choice = Console.ReadLine() ?? "N";
+            if (!isNewCourse)
+            {
+                Console.WriteLine("Do you want to update the course description?");
+                choice = Console.ReadLine() ?? "N";
+            }
+            else
+            {
+                choice = "Y";
+            }
             if (choice.Equals ("Y", StringComparison.InvariantCultureIgnoreCase))  
             {
                 Console.WriteLine("What is the description of the course");

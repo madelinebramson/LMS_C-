@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_LMS_C_.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+            <Label
+                Text="Hello, welcome to the LMS!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Please Choose Your View &#10;&#10;"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Button
+                Text="STUDENT" 
+                SemanticProperties.Hint="Takes you to the student view"
+                Clicked="StudentClicked"
+                HorizontalOptions="Fill" />
+            
+            <Button
+                Text="INSTRUCTOR" 
+                SemanticProperties.Hint="Takes you to the instructor view"
+                Clicked="InstructorClicked"
+                HorizontalOptions="Fill" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

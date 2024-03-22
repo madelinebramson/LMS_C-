@@ -1,4 +1,5 @@
-﻿using Library_LMS_C_.Models;
+﻿using Library_LMS_C_.DataBase;
+using Library_LMS_C_.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,9 @@ namespace Library_LMS_C_.Services
 {
     public class CourseService
     {
-        private List<Course> courseList;
         private static CourseService? _instance;
         private CourseService() 
         { 
-            courseList = new List<Course>();
         }
         public static CourseService Current
         {
@@ -28,13 +27,13 @@ namespace Library_LMS_C_.Services
         }
         public void Add(Course course)
         {
-            courseList.Add(course);
+            FakeDatabase.Courses.Add(course);
         }
         public List<Course> Courses
         { 
             get 
             { 
-                return courseList;
+                return FakeDatabase.Courses;
             } 
         }
         public IEnumerable<Course> Search(string query)
