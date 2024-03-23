@@ -78,7 +78,6 @@ namespace App_LMS_C_.Helpers
 
         public void ListStudents()
         {
-            studentService.Students.ForEach(Console.WriteLine);
             Console.WriteLine("Select a student:");
             var selectionStr = Console.ReadLine ();
             var selectionInt = int.Parse(selectionStr ?? "0");

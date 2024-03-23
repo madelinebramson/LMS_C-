@@ -37,6 +37,11 @@ namespace Library_LMS_C_.Services
         {
             FakeDatabase.People.Add(student);
         }
+
+        public void Remove(Student student)
+        {
+            FakeDatabase.People.Remove(student);
+        }
    
         public IEnumerable<Student?> Search(string query)
         {
