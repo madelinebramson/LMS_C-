@@ -11,6 +11,10 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             />
+        <SearchBar
+            Text="{Binding Query, Mode = TwoWay}"
+            Placeholder="Search for student"
+            ></SearchBar>
         <ListView
             ItemsSource="{Binding People}"
             SelectedItem="{Binding SelectedPerson}">

@@ -11,7 +11,9 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Entry Text="{Binding Path=Name,Mode=TwoWay}"></Entry>
+        <Entry Text="{Binding Path=Name,Mode=TwoWay}"
+                Placeholder="Enter Student's Name"></Entry>
+        
         <StackLayout RadioButtonGroup.GroupName="Classifications"
             RadioButtonGroup.SelectedValue="{Binding ClassificationString}">
             <RadioButton Content="Freshman"
