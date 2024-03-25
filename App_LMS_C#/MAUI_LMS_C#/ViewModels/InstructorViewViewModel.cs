@@ -20,7 +20,6 @@ namespace MAUI_LMS_C_.ViewModels
                 return new ObservableCollection<Person>(StudentService.Current.Students);
             }
         }
-
         public Person SelectedPerson { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,7 +32,7 @@ namespace MAUI_LMS_C_.ViewModels
         public void AddClick(Shell s)
         {
             var idParam = SelectedPerson?.Id ?? 0;
-            s.GoToAsync("//PersonDetail?personId=idParam");
+            s.GoToAsync($"//PersonDetail?personId={idParam}");
         }
         
         public void RemoveClick() 

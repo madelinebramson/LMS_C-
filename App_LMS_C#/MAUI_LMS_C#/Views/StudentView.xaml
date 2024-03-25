@@ -11,6 +11,7 @@
         <Button 
             Text="Back"
             Clicked="CancelClicked"
+            Margin="20,0,20,10"
             />
     </VerticalStackLayout>
 </ContentPage>

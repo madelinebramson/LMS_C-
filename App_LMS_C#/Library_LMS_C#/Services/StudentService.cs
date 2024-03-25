@@ -2,6 +2,7 @@
 using Library_LMS_C_.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,11 @@ namespace Library_LMS_C_.Services
         public IEnumerable<Student?> Search(string query)
         {
             return Students.Where(s => (s != null) && s.Name.ToUpper().Contains(query.ToUpper()));
+        }
+
+        public Person GetById(int id)
+        {
+            return FakeDatabase.People.FirstOrDefault(p => p.Id == id);
         }
     }
 }

@@ -4,11 +4,16 @@ using MAUI_LMS_C_.ViewModels;
 
 namespace MAUI_LMS_C_.Views;
 
+[QueryProperty(nameof(PersonId),"personId")]
 public partial class PersonDetailView : ContentPage
 {
 	public PersonDetailView()
 	{
 		InitializeComponent();
+	}
+	public int PersonId
+	{ 
+		set; get; 
 	}
 	private void OnLeaving(object sender, EventArgs e)
 	{
@@ -17,11 +22,10 @@ public partial class PersonDetailView : ContentPage
 
 	private void OnArriving(object sender, EventArgs e)
 	{
-		BindingContext = new PersonDetailViewModel();
+		BindingContext = new PersonDetailViewModel(PersonId);
 	}
     private void OkClick(object sender, EventArgs e)
     {
-
         (BindingContext as PersonDetailViewModel).AddPerson();
     }
 

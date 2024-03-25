@@ -18,18 +18,22 @@
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-
+        
             <Button
                 Text="STUDENT" 
                 SemanticProperties.Hint="Takes you to the student view"
                 Clicked="StudentClicked"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                Margin="20,0,20,10"
+                />
             
             <Button
                 Text="INSTRUCTOR" 
                 SemanticProperties.Hint="Takes you to the instructor view"
                 Clicked="InstructorClicked"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                Margin="20,0,20,10"
+                />
             
         </VerticalStackLayout>
     </ScrollView>
