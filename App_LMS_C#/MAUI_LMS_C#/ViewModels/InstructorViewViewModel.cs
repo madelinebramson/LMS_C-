@@ -13,6 +13,12 @@ namespace MAUI_LMS_C_.ViewModels
 {
     public class InstructorViewViewModel : INotifyPropertyChanged
     {
+        public InstructorViewViewModel()
+        {
+            IsEnrollmentsVisible= true;
+            IsCoursesVisible= false;
+
+        }
         public ObservableCollection<Person> People
         {
             get
@@ -26,7 +32,47 @@ namespace MAUI_LMS_C_.ViewModels
                 return new ObservableCollection<Person>(filteredList);
             }
         }
+        
+        public ObservableCollection<Course> Courses
+        {
+            get
+            {
+                var filteredList = CourseService
+                    .Current
+                    .Courses
+                    .Where(
+                    s => s.Name.ToUpper().Contains(Query?.ToUpper() ?? string.Empty));
+
+                return new ObservableCollection<Course>(filteredList);
+            }
+        }
+
+        public string Title { get => "Instructor / Administrator Menu"; }
+
+        public bool IsEnrollmentsVisible
+        { get; set; }
+
+        public bool IsCoursesVisible
+        { get; set; }
+
+        public void ShowEnrollments()
+        {
+            IsEnrollmentsVisible = true;
+            IsCoursesVisible = false;
+            NotifyPropertyChanged("IsEnrollmentsVisible");
+            NotifyPropertyChanged("IsCoursesVisible");
+        }
+
+        public void ShowCourses()
+        {
+            IsEnrollmentsVisible = false;
+            IsCoursesVisible = true;
+            NotifyPropertyChanged("IsEnrollmentsVisible");
+            NotifyPropertyChanged("IsCoursesVisible");
+        }
         public Person SelectedPerson { get; set; }
+
+        public Course SelectedCourse { get; set; }
        
         private string query;
 
@@ -37,6 +83,7 @@ namespace MAUI_LMS_C_.ViewModels
             {
                 query = value;
                 NotifyPropertyChanged(nameof(People));
+                NotifyPropertyChanged(nameof(Courses));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -46,13 +93,19 @@ namespace MAUI_LMS_C_.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void AddClick(Shell s)
+        public void AddEnrollmentClick(Shell s)
         {
             var idParam = SelectedPerson?.Id ?? 0;
             s.GoToAsync($"//PersonDetail?personId={idParam}");
         }
+
+        public void AddCourseClick(Shell s)
+        {
+            var idParam = SelectedCourse?.Id ?? 0;
+            s.GoToAsync($"//CourseDetail?courseId={idParam}");
+        }
         
-        public void RemoveClick() 
+        public void RemoveEnrollmentClick() 
         { 
             if (SelectedPerson == null) { return; }
 
@@ -60,9 +113,17 @@ namespace MAUI_LMS_C_.ViewModels
             RefreshView();
         }
 
+        public void RemoveCourseClick()
+        {
+            if (SelectedCourse == null) { return;}
+            CourseService.Current.Remove(SelectedCourse);
+            RefreshView();
+        }
+
         public void RefreshView()
         {
             NotifyPropertyChanged(nameof(People));
+            NotifyPropertyChanged(nameof(Courses));
         }
     }
 }

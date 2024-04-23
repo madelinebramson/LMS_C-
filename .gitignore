@@ -13,3 +13,11 @@
 /App_LMS_C#/MAUI_LMS_C#/bin/Debug
 /App_LMS_C#/.vs/ProjectEvaluation/app_lms_c#.metadata.v7.bin
 /App_LMS_C#/.vs/ProjectEvaluation/app_lms_c#.projects.v7.bin
+/LMS.API/LMS.API/obj/Debug/net8.0
+/LMS.API/LMS.API/obj/Release/net8.0
+/LMS.API/LMS.API/obj
+/LMS.API/LMS.API/bin/Debug/net8.0
+/LMS.API/.vs/LMS.API/DesignTimeBuild
+/LMS.API/.vs/LMS.API/FileContentIndex
+/LMS.API/.vs/LMS.API/config
+/LMS.API/.vs/LMS.API/v17

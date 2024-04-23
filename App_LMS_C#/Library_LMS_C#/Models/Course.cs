@@ -8,7 +8,19 @@ namespace Library_LMS_C_.Models
 {
     public class Course
     {
-        public string Code { get; set; }
+        private static int lastId = 0;
+        public string Code 
+        { 
+            get 
+            {
+                return $"{Prefix} {Id}";
+            }
+        }
+        public string Prefix { get; set; }
+        public int Id
+        {
+            get; private set;
+        }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Person> Roster { get; set; }
@@ -16,17 +28,19 @@ namespace Library_LMS_C_.Models
         public List<Module> Modules { get; set; }
         public Course()
         {
-            Code = string.Empty;
+            Prefix = string.Empty;
             Name = string.Empty;
             Description = string.Empty;
             Roster = new List<Person>();
             Assignments = new List<Assignment>();
             Modules = new List<Module>();
+
+            Id = ++lastId;
         }
 
         public override string ToString()
         {
-            return $"{Code} - {Name}";
+            return $"[{Code}] - {Name}";
         }
 
         public string DetailDisplay
