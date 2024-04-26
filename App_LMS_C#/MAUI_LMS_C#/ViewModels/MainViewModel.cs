@@ -9,6 +9,6 @@ namespace MAUI_LMS_C_.ViewModels
 {
     internal class MainViewModel
     {
-       public List<Person> Students { get; set; } = new List<Person>();
+       public List<Student> Students { get; set; } = new List<Student>();
     }
 }

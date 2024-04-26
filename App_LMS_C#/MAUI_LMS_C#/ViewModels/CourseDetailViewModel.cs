@@ -42,7 +42,7 @@ namespace MAUI_LMS_C_.ViewModels
                 LoadById(id);
             }
         }
-        public ObservableCollection<Person> NotEnrolledStudents
+        public ObservableCollection<Student> NotEnrolledStudents
         {
             get
             {
@@ -53,11 +53,11 @@ namespace MAUI_LMS_C_.ViewModels
                     .Where(
                     s => s.Name.ToUpper().Contains(Query?.ToUpper() ?? string.Empty));
 
-                return new ObservableCollection<Person>(filteredList);
+                return new ObservableCollection<Student>(filteredList);
             }
         }
         
-        public Person SelectedStudent { get; set; }
+        public Student SelectedStudent { get; set; }
 
         private string query;
         public string Query

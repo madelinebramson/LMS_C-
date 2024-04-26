@@ -70,7 +70,7 @@ namespace MAUI_LMS_C_.ViewModels
             NotifyPropertyChanged("IsEnrollmentsVisible");
             NotifyPropertyChanged("IsCoursesVisible");
         }
-        public Person SelectedPerson { get; set; }
+        public Student SelectedPerson { get; set; }
 
         public Course SelectedCourse { get; set; }
        
@@ -95,6 +95,15 @@ namespace MAUI_LMS_C_.ViewModels
 
         public void AddEnrollmentClick(Shell s)
         {
+            s.GoToAsync($"//PersonDetail");
+        }
+
+        public void EditEnrollmentClick(Shell s)
+        {
+            if(SelectedPerson == null)
+            {
+                return;
+            }
             var idParam = SelectedPerson?.Id ?? 0;
             s.GoToAsync($"//PersonDetail?personId={idParam}");
         }
@@ -109,7 +118,7 @@ namespace MAUI_LMS_C_.ViewModels
         { 
             if (SelectedPerson == null) { return; }
 
-            StudentService.Current.Remove((Student)SelectedPerson);
+            StudentService.Current.Remove(SelectedPerson.Id);
             RefreshView();
         }
 

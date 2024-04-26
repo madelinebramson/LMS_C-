@@ -52,6 +52,7 @@ namespace MAUI_LMS_C_.ViewModels
                 var refToUpdate = StudentService.Current.GetById(Id) as Student;
                 refToUpdate.Name = Name;
                 refToUpdate.Classification = StringToClass(ClassificationString);
+                StudentService.Current.Add(refToUpdate);
             }
             Shell.Current.GoToAsync("//Instructor");
         }

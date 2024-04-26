@@ -1,59 +1,80 @@
-﻿using Library_LMS_C_.DataBase;
+﻿
 using Library_LMS_C_.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using Library_LMS_C_.Library.Utilities;
+using Newtonsoft.Json;
 
 namespace Library_LMS_C_.Services
 {
     public class StudentService
     {
-
-        private static StudentService? _instance;
-
-        public IEnumerable<Student?> Students
+        public List<Student> Students
         {
-            get { return FakeDatabase.People.Where(p => p is Student).Select(p => p as Student); }
-        }
-        private StudentService()
-        {
+            get
+            {
+                var response = new WebRequestHandler()
+                .Get("/Person")
+                .Result;
+
+                var students = JsonConvert.DeserializeObject < List<Student>>(response);
+                return students;
+            }
         }
 
+        private static StudentService? instance;
         public static StudentService Current
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new StudentService();
+                    instance = new StudentService();
                 }
-
-                return _instance;
+                return instance;
             }
         }
+
+        private StudentService()
+        {
+            //var response = new WebRequestHandler()
+            //    .Get("/Person")
+            //    .Result;
+
+            //Students = JsonConvert.DeserializeObject<List<Student>>(response) ?? new List<Student>();
+        }
+
+        public void Remove(int id)
+        {
+            var handler = new WebRequestHandler().Delete($"/Person/DeleteStudent/{id}");
+            var studentToDelete = Students.FirstOrDefault(s => s.Id == id);
+            //if (studentToDelete != null)
+            //{
+            //    Students.Remove(studentToDelete);
+            //}
+        }
+
         public void Add(Student student)
         {
-            FakeDatabase.People.Add(student);
+            var response = new WebRequestHandler().Post("/Person/AddOrUpdateStudent", student).Result;
+            //var myUpdatedStudent = JsonConvert.DeserializeObject<Student>(response);
+            //var existingStudent = Students.FirstOrDefault(s => s.Id == myUpdatedStudent.Id);
         }
 
-        public void Remove(Student student)
+        public Student? GetById(int id)
         {
-            FakeDatabase.People.Remove(student);
+
+            var response = new WebRequestHandler()
+                .Get($"/Person/Student/{id}")
+                .Result;
+            var Student = JsonConvert.DeserializeObject<Student>(response);
+            return Student;
         }
-   
-        public IEnumerable<Student?> Search(string query)
+
+        public IEnumerable<Student> Search(string query)
         {
-            return Students.Where(s => (s != null) && s.Name.ToUpper().Contains(query.ToUpper()));
+            return Students
+                .Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
         }
-
-        public Person GetById(int id)
-        {
-            return FakeDatabase.People.FirstOrDefault(p => p.Id == id);
-        }
-
-
     }
 }

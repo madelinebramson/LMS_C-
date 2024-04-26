@@ -5,16 +5,20 @@
         private static int lastId = 0;
         public int Id
         { 
-            get; private set; 
+            get; set; 
         }
         public string Name { get; set; }
 
         public Person()
         {
             Name = string.Empty;
-            Id = ++lastId;
+            //Id = ++lastId;
         }
 
+        public void incrementId()
+        {
+            Id = ++lastId;
+        }
         public override string ToString()
         {
             return $"[{Id}] {Name}";

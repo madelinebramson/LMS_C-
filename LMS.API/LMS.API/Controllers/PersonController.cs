@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Library_LMS_C_.Models;
 using LMS.API.EC;
+using LMS.API.Database;
+using Library_LMS_C_.Models;
 
 namespace PP.API.Controllers
 {
@@ -16,33 +17,28 @@ namespace PP.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Person> Get()
+        public List<Student> Get()
         {
-            return new Person().Search();
+            return new PersonEC().Students;
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("Student/{id}")]
         public Person? GetId(int id)
         {
-            return new Person().Get(id);
+            return new PersonEC().GetById(id);
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("DeleteStudent/{id}")]
         public Person? Delete(int id)
         {
-            return new Person().Delete(id);
+            return new PersonEC().Remove(id);
         }
 
-        [HttpPost]
-        public Person? AddOrUpdate([FromBody] Person person)
+        [HttpPost("AddOrUpdateStudent")]
+        public Person? AddOrUpdate([FromBody] Student student)
         {
-            return new Person().AddOrUpdate(person);
+            return new PersonEC().Add(student);
         }
 
-        [HttpPost("Search")]
-        public IEnumerable<Person> Search([FromBody] QueryMessage query)
-        {
-            return new Person().Search(query.Query);
-        }
     }
 }

@@ -8,7 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Library_LMS_C#">
+      <HintPath>..\..\App_LMS_C#\Library_LMS_C#\bin\Debug\net8.0\Library_LMS_C#.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
