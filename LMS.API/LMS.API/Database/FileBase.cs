@@ -32,6 +32,15 @@ namespace LMS.API.Database
             _studentRoot = $"{_root}\\Student";
             _courseRoot = $"{_root}\\Course";
 
+            if (!Directory.Exists(_studentRoot)) 
+            {
+                Directory.CreateDirectory(_studentRoot);
+            }
+            if (!Directory.Exists(_courseRoot))
+            {
+                Directory.CreateDirectory(_courseRoot);
+            }
+                    
         }
 
         private int lastStudentId => Students.Any() ? Students.Select(c => c.Id).Max() : 0;
@@ -54,6 +63,7 @@ namespace LMS.API.Database
 
             return s;
         }
+
 
         public List<Student> Students
         {

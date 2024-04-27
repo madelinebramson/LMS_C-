@@ -3,7 +3,7 @@ using LMS.API.EC;
 using LMS.API.Database;
 using Library_LMS_C_.Models;
 
-namespace PP.API.Controllers
+namespace LMS.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
